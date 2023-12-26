@@ -10,29 +10,33 @@ class Income:
     # ... [other methods] ...
 
     def save_to_db(self, db_path):
-        conn = sqlite3.connect(db_path)
-        cursor = conn.cursor()
-        
-        # Create table if it doesn't exist
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS income (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                amount REAL,
-                timeframe TEXT,
-                state TEXT,
-                source TEXT
-            )
-        ''')
+        try:
+            print("Connecting to database at:", db_path)
+            conn = sqlite3.connect(db_path)
+            cursor = conn.cursor()
+            print("Connected to database.")
 
-        # Insert data
-        cursor.execute('''
-            INSERT INTO income (amount, timeframe, state, source) 
-            VALUES (?, ?, ?, ?)
-        ''', (self.amount, self.timeframe, self.state, self.source))
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS income (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    amount REAL,
+                    timeframe TEXT,
+                    state TEXT,
+                    source TEXT
+                )
+            ''')
+            print("Table created or already exists.")
 
-        conn.commit()
-        conn.close()
+            cursor.execute('''
+                INSERT INTO income (amount, timeframe, state, source) 
+                VALUES (?, ?, ?, ?)
+            ''', (self.amount, self.timeframe, self.state, self.source))
+            print("Data inserted:", self.amount, self.timeframe, self.state, self.source)
 
-# Example usage (outside the Income class)
-my_income = Income(5000, 'Monthly', 'CA', 'Software Engineer')
-my_income.save_to_db('my_finances.db')
+            conn.commit()
+            print("Changes committed to database.")
+        except sqlite3.Error as e:
+            print(f"An error occurred: {e}")
+        finally:
+            conn.close()
+            print("Connection closed.")
