@@ -7,8 +7,9 @@ class MainApplication(tk.Tk):
         super().__init__()
         self.title("Financial Tracker")
 
-        self.create_welcome_frame()
+        self.create_welcome_frame() # create the welcome frame
         self.create_income_frame()  # Create the income frame
+        self.create_budget_frame()  # create the budget frame
 
     def create_welcome_frame(self):
         self.welcome_frame = ttk.Frame(self)
@@ -26,8 +27,8 @@ class MainApplication(tk.Tk):
         self.welcome_frame.pack(expand=1, fill="both")
 
         # Button for managing income
-        income_button = tk.Button(self.welcome_frame, text="Manage Income", command=self.show_income_frame)
-        income_button.pack(pady=5)
+        budget_button = tk.Button(self.welcome_frame, text="Manage Budget", command=self.show_budget_frame)
+        budget_button.pack(pady=5)
 
         # ... rest of the welcome frame ...
 
@@ -53,9 +54,19 @@ class MainApplication(tk.Tk):
         submit_btn = tk.Button(self.income_frame, text="Submit Income", command=self.submit_income)
         submit_btn.grid(row=4, column=1)
 
+    def create_budget_frame(self):
+        self.budget_frame = ttk.Frame(self)
+
     def show_income_frame(self):
         self.welcome_frame.pack_forget()  # Hide welcome frame
         self.income_frame.pack(expand=1, fill="both")  # Show income frame
+        
+    def show_budget_frame(self):
+        self.welcome_frame.pack_forget()  # Hide welcome frame
+        self.budget_frame.pack(expand=1, fill="both")  # Show budget frame
+        
+    def submit_budget(self):
+        pass
 
     def submit_income(self):
         # Retrieve data from entry fields
