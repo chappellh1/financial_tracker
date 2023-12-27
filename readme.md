@@ -1,11 +1,10 @@
 What does this do?
 
-Version 1.0:
-    This allows for user input to enter one to many incomes and the data associated with those. This
-    will then return the total income from all sources entered. This currently does not store
-    user input in a permanent way.
+Version 1.1:
+    A gui was implemented and allows users to input income info into the income table in the my_finances database. Budget will be worked on next.
 
 REQUIREMENTS
 
 SQLITE3
 PYTHON3
+tkinter
