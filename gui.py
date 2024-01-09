@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
-from income import Income  # Assuming you have an Income class for database operations
+from income import Income  # Income class
+from budget import Budget  # budget class
+from expense import Expense # Expense class
 
 class MainApplication(tk.Tk):
     def __init__(self):
@@ -10,6 +12,7 @@ class MainApplication(tk.Tk):
         self.create_welcome_frame() # create the welcome frame
         self.create_income_frame()  # Create the income frame
         self.create_budget_frame()  # create the budget frame
+        self.create_expense_frame()  # create the expense frame
 
     def create_welcome_frame(self):
         self.welcome_frame = ttk.Frame(self)
@@ -17,20 +20,21 @@ class MainApplication(tk.Tk):
         welcome_label.pack(pady=10)
 
         # Buttons for different options
-        income_button = tk.Button(self.welcome_frame, text="Manage Income", command=self.show_income_frame)
+        income_button = tk.Button(self.welcome_frame, text="Input Income", command=self.show_income_frame)
         income_button.pack(pady=5)
-
-
 
         # Add more buttons as needed
 
         self.welcome_frame.pack(expand=1, fill="both")
 
         # Button for managing income
-        budget_button = tk.Button(self.welcome_frame, text="Manage Budget", command=self.show_budget_frame)
+        budget_button = tk.Button(self.welcome_frame, text="Input Budget", command=self.show_budget_frame)
         budget_button.pack(pady=5)
 
-        # ... rest of the welcome frame ...
+        # Button for managing Expenses
+        
+        expense_button = tk.Button(self.welcome_frame, text="Input Expenses", command=self.show_expense_frame)
+        expense_button.pack(pady=5)
 
     def create_income_frame(self):
         self.income_frame = ttk.Frame(self)
@@ -56,6 +60,9 @@ class MainApplication(tk.Tk):
 
     def create_budget_frame(self):
         self.budget_frame = ttk.Frame(self)
+        
+    def create_expense_frame(self):
+        self.expense_frame = ttk.Frame(self)
 
     def show_income_frame(self):
         self.welcome_frame.pack_forget()  # Hide welcome frame
@@ -65,7 +72,14 @@ class MainApplication(tk.Tk):
         self.welcome_frame.pack_forget()  # Hide welcome frame
         self.budget_frame.pack(expand=1, fill="both")  # Show budget frame
         
+    def show_expense_frame(self):
+        self.welcome_frame.pack_forget()  # Hide welcome frame
+        self.expense_frame.pack(expand=1, fill="both")  # Show budget frame
+        
     def submit_budget(self):
+        pass
+    
+    def submit_expense(self):
         pass
 
     def submit_income(self):
